@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>像素寵物咖啡廳</title>
     
-    <!-- 載入 Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- 載入像素字體 'Press Start 2P' 和 'Noto Sans TC' (用於內文) --><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- 載入字體：Noto Sans TC (閱讀) 和 Press Start 2P (像素標題) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
     
     <style>
         /* --- 自訂樣式 --- */
@@ -140,7 +142,7 @@
             width: 32px;
             height: 32px;
             background-color: var(--accent); /* 腳印顏色 */
-            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path fill="currentColor" d="M224 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192zm-64-80a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM352 224a96 96 0 1 0 0-192 96 96 0 1 0 0 192zm-64-80a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM480 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192zm-64-80a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM192 480a96 96 0 1 0 0-192 96 96 0 1 0 0 192zm-64-80a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM64 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192zm-64-80a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M224 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192zm-64-80a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM352 224a96 96 0 1 0 0-192 96 96 0 1 0 0 192zm-64-80a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM480 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192zm-64-80a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM192 480a96 96 0 1 0 0-192 96 96 0 1 0 0 192zm-64-80a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM64 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192zm-64-80a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>');
             mask-repeat: no-repeat;
             mask-size: contain;
             mask-position: center;
@@ -148,6 +150,38 @@
             box-shadow: 2px 2px 0px var(--primary); /* 腳印的陰影 */
             border: 2px solid var(--primary); /* 腳印的邊框 */
             flex-shrink: 0;
+        }
+
+        /* --- 新增的動畫 --- */
+
+        /* 1. 標題閃爍動畫 */
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--primary);
+            }
+            50% {
+                text-shadow: 0 0 10px #fff, 0 0 20px var(--primary), 0 0 30px var(--primary);
+            }
+        }
+        
+        .sparkle-text {
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        /* 2. 營業時間脈動動畫 */
+        @keyframes gentle-pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 6px 6px 0px var(--accent);
+            }
+            50% {
+                transform: scale(1.03); /* 輕微放大 */
+                box-shadow: 8px 8px 0px var(--accent); /* 陰影也跟著動 */
+            }
+        }
+
+        .pulse-box {
+            animation: gentle-pulse 2.5s ease-in-out infinite;
         }
 
 
@@ -165,39 +199,48 @@
 </head>
 <body class="p-4 md:p-8">
 
-    <!-- 頂部的像素狗狗 --><img 
+    <!-- 角落的裝飾狗狗 -->
+    <img 
         src="https://placehold.co/150x150/eedd66/5D4037?text=(^_^)&font=pressstart2p" 
         alt="像素狗狗裝飾" 
         class="pixel-dog pixel-dog-top-right"
     >
-    <!-- 左下角的像素狗狗 --><img 
+    <img 
         src="https://placehold.co/150x150/eedd66/5D4037?text=(o.o)&font=pressstart2p" 
         alt="像素狗狗裝飾" 
         class="pixel-dog pixel-dog-bottom-left"
     >
 
-    <!-- 主要內容容器 --><div class="max-w-4xl mx-auto pixel-box">
+    <!-- 主要內容容器 -->
+    <div class="max-w-4xl mx-auto pixel-box">
         
-        <!-- 1. 頂部橫幅 (使用咖啡色，像布丁狗的帽子) --><header class="bg-[var(--accent)] p-6 md:p-10 text-center">
+        <!-- 1. 頂部橫幅 (使用咖啡色，像布丁狗的帽子) -->
+        <header class="bg-[var(--accent)] p-6 md:p-10 text-center">
             
-            <!-- 像素風格的大頭貼 --><img 
+            <!-- 像素風格的大頭貼 -->
+            <img 
                 src="https://placehold.co/128x128/eedd66/5D4037?text=(='.'=)&font=pressstart2p" 
                 alt="咖啡廳Logo - 像素狗狗頭像"
                 class="w-32 h-32 mx-auto border-4 border-[var(--primary)]"
                 style="image-rendering: pixelated;"
             >
             
-            <!-- 標題：咖啡廳名稱 --><h1 class="font-pixel text-3xl md:text-4xl text-white mt-6">
+            <!-- 主標題 (加上閃爍特效) -->
+            <h1 class="font-pixel text-3xl md:text-4xl text-white mt-6 sparkle-text">
                 布丁狗狗咖啡廳
             </h1>
-            <!-- 副標題：Slogan --><p class="font-pixel text-lg text-[var(--primary)] mt-2">
+            
+            <!-- 副標題 -->
+            <p class="font-pixel text-lg text-[var(--primary)] mt-2">
                 // 毛茸茸的像素天堂 //
             </p>
         </header>
 
-        <!-- 2. 內容區域 --><main class="p-6 md:p-10">
+        <!-- 2. 主要內容 -->
+        <main class="p-6 md:p-10">
 
-            <!-- 關於本店 --><section>
+            <!-- 關於本店 -->
+            <section>
                 <h2 class="font-pixel text-2xl mb-4 text-[var(--accent)]">
                     // 關於本店
                 </h2>
@@ -208,13 +251,15 @@
                 </p>
             </section>
 
-            <!-- 像素腳印分隔線 --><div class="pixel-divider">
+            <!-- 腳印分隔線 -->
+            <div class="pixel-divider">
                 <span class="paw-icon"></span>
                 <span class="paw-icon"></span>
                 <span class="paw-icon"></span>
             </div>
 
-            <!-- 本店特色 --><section class="mt-10">
+            <!-- 本店特色 -->
+            <section class="mt-10">
                 <h2 class="font-pixel text-2xl mb-6 text-[var(--accent)]">
                     // 本店特色
                 </h2>
@@ -227,13 +272,15 @@
                 </ul>
             </section>
 
-            <!-- 像素腳印分隔線 --><div class="pixel-divider">
+            <!-- 腳印分隔線 -->
+            <div class="pixel-divider">
                 <span class="paw-icon"></span>
                 <span class="paw-icon"></span>
                 <span class="paw-icon"></span>
             </div>
 
-            <!-- 菜單精選 --><section class="mt-10">
+            <!-- 菜單精選 -->
+            <section class="mt-10">
                 <h2 class="font-pixel text-2xl mb-6 text-[var(--accent)]">
                     // 菜單精選
                 </h2>
@@ -247,24 +294,28 @@
                 </div>
             </section>
 
-            <!-- 像素腳印分隔線 --><div class="pixel-divider">
+            <!-- 腳印分隔線 -->
+            <div class="pixel-divider">
                 <span class="paw-icon"></span>
                 <span class="paw-icon"></span>
                 <span class="paw-icon"></span>
             </div>
 
-            <!-- 營業時間 --><section class="mt-10 text-center">
+            <!-- 營業時間 -->
+            <section class="mt-10 text-center">
                 <h2 class="font-pixel text-2xl mb-6 text-[var(--accent)]">
                     // 營業時間
                 </h2>
-                <div class="pixel-box inline-block p-4 bg-yellow-100 text-[var(--accent)]">
+                <!-- 加上脈動特效 -->
+                <div class="pixel-box inline-block p-4 bg-yellow-100 text-[var(--accent)] pulse-box">
                     <p class="font-pixel text-lg mb-2">週二至週日</p>
                     <p class="font-pixel text-2xl">11:00 AM - 08:00 PM</p>
                     <p class="font-pixel text-lg mt-2">週一公休</p>
                 </div>
             </section>
 
-            <!-- 聯絡與訂位 --><section class="mt-12 text-center">
+            <!-- 聯絡我們 -->
+            <section class="mt-12 text-center">
                 <h2 class="font-pixel text-2xl mb-6 text-[var(--accent)]">
                     // 聯絡我們 & 訂位
                 </h2>
@@ -283,7 +334,8 @@
 
         </main>
         
-        <!-- 頁尾 --><footer class="text-center p-6 border-t-4 border-dashed border-[var(--accent)] mt-8">
+        <!-- 3. 頁尾 -->
+        <footer class="text-center p-6 border-t-4 border-dashed border-[var(--accent)] mt-8">
             <p class="font-pixel text-xs text-gray-500">
                 (C) 2025 布丁狗狗咖啡廳. All rights reserved.
             </p>
